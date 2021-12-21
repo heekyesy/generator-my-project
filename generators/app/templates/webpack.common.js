@@ -1,5 +1,5 @@
 const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -11,37 +11,36 @@ module.exports = {
     new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: 'Production'
-    }),
+    })
   ],
   output: {
-    filename: '[name].bundle.js',
-    path: path.resolve(__dirname, 'dist')
+    filename: 'app.bundle.js',
+    path: path.resolve(__dirname, 'dist'),
+    // pathinfo: false,
   },
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ]
+    extensions: [ '.js' ]
   },
   module: {
     rules: [
       {
         test: /\.css$/,
         use: [
-          'style-loader',
-          'css-loader'
+          { loader: 'style-loader' },
+          { loader: 'css-loader' }
         ]
       },
       {
         test: /\.less$/,
         use: [
-          "style-loader",
-          "css-loader",
-          "less-loader",
+          {loader: "style-loader"},
+          {loader:"css-loader"},
+          {loader:"less-loader"},
         ],
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        use: 'file-loader'
       },
       {
         test: /\.js$/,
